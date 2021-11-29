@@ -124,8 +124,8 @@ class DQNAgent:
 
 
 class DDQNAgent:
-    def __init__(self, possible_actions, start_memory_len, max_memory_len, start_epsilon, learn_rate, scores_len=100, start_lives=2,
-                 debug=False):
+    def __init__(self, possible_actions, start_memory_len, max_memory_len, start_epsilon, learn_rate, scores_len=10,
+                 start_lives=2, debug=False):
 
         # Dimensions we reduce the input image down to to simplify training
         self.STATE_DIM_1 = 112
