@@ -17,12 +17,12 @@ class DQNAgent:
         self.STATE_DIM_3 = 4
 
         self.t = 0  # current time step
-        self.MAX_STEPS = 4000  # Max length of an episode
+        self.MAX_IDLE_STEPS = 1000
 
         self.memory = Memory(max_memory_len)
         self.possible_actions = possible_actions
         self.epsilon = start_epsilon
-        self.epsilon_decay = 50
+        self.epsilon_decay = 500
         self.epsilon_min = 0.01
         self.gamma = .9
         self.learn_rate = learn_rate
@@ -35,6 +35,7 @@ class DQNAgent:
         self.learns = 0
         self.batch_size = 16
         self.total_time_steps = 0
+        self.idle_steps = 0
 
         self.PARENT_FOLDER = './DQN'
 
@@ -118,7 +119,7 @@ class DQNAgent:
 
         self.learns += 1
 
-        if self.learns % 10 == 0:
+        if self.learns % self.scores_len == 0:
             self.model_target.set_weights(self.model.get_weights())
             print('\nTarget model updated')
 
@@ -133,12 +134,12 @@ class DDQNAgent:
         self.STATE_DIM_3 = 4
 
         self.t = 0  # current time step
-        self.MAX_STEPS = 4000  # Max length of an episode
+        self.MAX_IDLE_STEPS = 1000
 
         self.memory = Memory(max_memory_len)
         self.possible_actions = possible_actions
         self.epsilon = start_epsilon
-        self.epsilon_decay = 50
+        self.epsilon_decay = 500
         self.epsilon_min = .01
         self.gamma = 0.9
         self.learn_rate = learn_rate
@@ -151,6 +152,7 @@ class DDQNAgent:
         self.learns = 0
         self.batch_size = 16
         self.total_time_steps = 0
+        self.idle_steps = 0
 
         self.PARENT_FOLDER = './DDQN'
 
@@ -235,6 +237,6 @@ class DDQNAgent:
 
         self.learns += 1
 
-        if self.learns % 10 == 0:
+        if self.learns % self.scores_len == 0:
             self.model_target.set_weights(self.model.get_weights())
             print('\nTarget model updated')

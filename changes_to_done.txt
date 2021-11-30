@@ -1,0 +1,5 @@
+RL: look up random seed (FAIL)
+Randomly change start state (FAIL)
+exploration rate (DONE)
+learn rate (PENDING)
+idling (PENDING)
