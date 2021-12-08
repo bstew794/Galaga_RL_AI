@@ -30,9 +30,11 @@ def take_step(name, env, agent, score, debug):
         agent.idle_steps = 0
     elif info['lives'] > agent.lives:
         agent.lives += 1
-        agent.idle_steps = 0
-    elif next_frame_reward == 0:
-        agent.idle_steps += 1
+    else:
+        if next_frame_reward == 0:
+            agent.idle_steps += 1
+        else:
+            agent.idle_steps = 0
 
     next_frame = ppf.resize_frame(next_frame, agent.STATE_DIM_1, agent.STATE_DIM_2)
     new_state = [agent.memory.frames[-3], agent.memory.frames[-2], agent.memory.frames[-1], next_frame]

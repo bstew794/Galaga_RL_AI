@@ -1,7 +1,7 @@
 import retro
 import time
 
-movie = retro.Movie('./DDQN/movies/GalagaDemonsOfDeath-Nes-1Player.Level1-000050.bk2')
+movie = retro.Movie('C:/Users/bstew/Documents/CS/CS 5640/project/Progress_Reports/DDQN_v2/movies/GalagaDemonsOfDeath-Nes-1Player.Level1-000001.bk2')
 movie.step()
 
 env = retro.make(game=movie.get_game(), state=None, use_restricted_actions=retro.Actions.ALL, players=movie.players)

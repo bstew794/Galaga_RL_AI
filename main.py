@@ -11,8 +11,8 @@ name = 'GalagaDemonsOfDeath-Nes'
 
 scores_len = 25
 
-agent = agents.DDQNAgent(possible_actions=[1, 6, 7, 8], start_memory_len=64000, max_memory_len=4800000, start_epsilon=1,
-                         learn_rate=0.00025, scores_len=scores_len)
+agent = agents.DQNAgent(possible_actions=[1, 6, 7, 8], start_memory_len=64000, max_memory_len=4800000, start_epsilon=1,
+                        learn_rate=0.003, scores_len=scores_len)
 
 env = enviroments.make_env(name, agent)
 
@@ -20,14 +20,13 @@ last_few_avg = [0]
 scores = deque(maxlen=scores_len)
 max_score = 0
 
-# For Testing Purposes
-# agent.model.load_weights(agent.PARENT_FOLDER + '/weights/weights_at_50.hdf5')
-# agent.model_target.load_weights(agent.PARENT_FOLDER + '/weights/weights_at_50.hdf5')
+# agent.model.load_weights(agent.PARENT_FOLDER + '/weights/weights_at_325.hdf5')
+# agent.model_target.load_weights(agent.PARENT_FOLDER + '/weights/weights_at_275.hdf5')
 # agent.epsilon = 0.0
 
 env.reset()
 
-for i in range(1000000):
+for i in range(501):
     time_steps = agent.total_time_steps
     time_e = time.time()
     score = enviroments.play_episode(name, env, agent, debug=True)
@@ -62,14 +61,14 @@ for i in range(1000000):
         plt.xlabel("Episodes")
         plt.savefig(agent.PARENT_FOLDER + '/plots/' + 'last_' + str(agent.scores_len) + '_avg_plt_at_' + str(i))
 
-        # if last_few_avg[-1] <= last_few_avg[-2] + 100:
-        #   agent.epsilon += 0.09
+        if last_few_avg[-1] <= last_few_avg[-2] + 100:
+            agent.epsilon += 0.002
 
-        #   if agent.epsilon > 1:
-        #       agent.epsilon = 0.91
+            if agent.epsilon > 1:
+                agent.epsilon = 0.90
 
-        #   if agent.learn_rate > agent.MIN_LEARN_RATE:
-        #       agent.learn_rate -= .00005
+            if agent.learn_rate > agent.MIN_LEARN_RATE:
+                agent.learn_rate -= .0001
 
         weightsFilename = 'weights_at_' + str(i) + '.hdf5'
 
