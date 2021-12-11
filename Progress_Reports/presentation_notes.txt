@@ -1,9 +1,63 @@
 PRESENTATION NOTES: 12/10/2021
-1:
-2:
-3:
-4:
-5:
-6:
-7:
-8:
+
+Slide 1: Title Card: N/A
+
+2: What & Why
+Started out as a simple method comparision turned into full-blown
+devlopment
+Specifically Convolutional Neural Networks
+had to justify my research as meaningful so I decided to make the
+purpose related to something like Israel's Iron Dome system
+
+3: Version 1
+Actually went through a lot of iterations to get to this first
+version but removed those minor revision
+DQN techinically does not score higher but it does score lower,
+more on this later
+
+4: Version 2
+By "play fully" I mean that there was always a
+hard set time limit on how long they were allowed to play
+
+5: Version 3
+Idle-steps are defined as steps that resulted in no life count or
+score changes
+Absolutely baffled by the inversion of performance in reference to
+the DQN and DDQN agents
+
+6: Demo of Lazy Strategy
+This "Lazy" strategy apparantly does not move, but it does seem to
+rythmically fire its projectiles
+It definitely scores higher than a random agent on average
+It scores 5850 points every single episode since the steps a
+player takes determines the enviroment in Galaga, so if a player
+decides to take the exact same steps every episode then the same
+states are encountered
+In theory, this is not true and its learn rate could change the
+results if run for an infinite number of episodes
+Most every agent discovered this same strategy
+Never got the agents to learn a better moveset than this
+
+7: Demo of Cowardly Strategy
+Every Agent used some variant of this strategy sometimes going left
+instead of right
+Infuriatingly hard to have agent learn to avoid doing this
+Much sadness and lost hours of sleep
+
+8:Summary and Conclusion
+Inconclusive research spent so much time just trying to get things
+to work since nearly no one else had done this before publicly
+I feel like a failure and I feel like I accomplished nothing
+I basically just retraced the devlopment process of the original
+source from georgefidler minus my own addition of an idle-steps
+limit
+There were more things I would loved to have tried, and I wish I
+could have trained this faster or have more time to train at least
+one agent
+I would've tried a dynamic exploration rate, priority memory queue,
+and more reward dispersion
+Next major step would've been to link sequences of actions with
+rewards to account for projectile travel time, and to better
+relate to patterns
+A huge part of this could've been a CNN/RNN frankenstein monster
+I am at least happy that I am graduating

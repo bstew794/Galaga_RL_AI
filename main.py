@@ -29,7 +29,7 @@ env.reset()
 for i in range(501):
     time_steps = agent.total_time_steps
     time_e = time.time()
-    score = enviroments.play_episode(name, env, agent, debug=True)
+    score = enviroments.play_episode(name, env, agent, debug=False)
     scores.append(score)
 
     if score > max_score:
@@ -55,20 +55,21 @@ for i in range(501):
             os.remove(agent.PARENT_FOLDER + '/movies/' + filename)
 
         last_few_avg.append(sum(scores) / len(scores))
+        plt.ylim([0, 10000])
         plt.plot(np.arange(0, i + 1, agent.scores_len), last_few_avg)
-        plt.title("Average Score Per " + str(agent.scores_len) + " Episodes")
+        plt.title("Average Score Per " + str(agent.scores_len) + " Episodes (Exploration Only)")
         plt.ylabel("Average Score")
         plt.xlabel("Episodes")
         plt.savefig(agent.PARENT_FOLDER + '/plots/' + 'last_' + str(agent.scores_len) + '_avg_plt_at_' + str(i))
 
-        if last_few_avg[-1] <= last_few_avg[-2] + 100:
-            agent.epsilon += 0.002
+        # if last_few_avg[-1] <= last_few_avg[-2] + 100:
+        #    agent.epsilon += 0.05
 
-            if agent.epsilon > 1:
-                agent.epsilon = 0.90
+        #    if agent.epsilon > 1:
+        #        agent.epsilon = 0.95
 
-            if agent.learn_rate > agent.MIN_LEARN_RATE:
-                agent.learn_rate -= .0001
+        #    if agent.learn_rate > agent.MIN_LEARN_RATE:
+        #        agent.learn_rate -= .0001
 
         weightsFilename = 'weights_at_' + str(i) + '.hdf5'
 

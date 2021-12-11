@@ -10,8 +10,8 @@ name = 'GalagaDemonsOfDeath-Nes'
 
 scores_len = 25
 
-agent = agents.DDQNAgent(possible_actions=[1, 6, 7, 8], start_memory_len=64000, max_memory_len=4800000, start_epsilon=0,
-                         learn_rate=0, scores_len=scores_len)
+agent = agents.DQNAgent(possible_actions=[1, 6, 7, 8], start_memory_len=64000, max_memory_len=4800000, start_epsilon=0,
+                        learn_rate=0.0025, scores_len=scores_len)
 
 env = enviroments.make_env(name, agent)
 
@@ -28,7 +28,7 @@ for file in os.scandir(directory):
 
     time_steps = agent.total_time_steps
     time_e = time.time()
-    score = enviroments.play_episode(name, env, agent, debug=True)
+    score = enviroments.play_episode(name, env, agent, debug=False)
     scores.append(score)
 
     if score > max_score:
@@ -43,8 +43,9 @@ for file in os.scandir(directory):
 
     i += 1
 
-plt.plot(scores)
-plt.title("Score Over Weights per " + str(agent.scores_len) + " Episodes")
+plt.ylim([0, 10000])
+plt.plot(np.arange(0, 300, 25), scores)
+plt.title("Score Using Saved Weights per " + str(agent.scores_len) + " Episodes (Exploitation Only)")
 plt.ylabel("Score")
-plt.xlabel("Order of Weights")
+plt.xlabel("Number of Training Episodes")
 plt.savefig(agent.PARENT_FOLDER + '/test_plots/' + 'scores_plt')
