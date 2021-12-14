@@ -1,8 +1,8 @@
 import retro
 import time
 
-directory = './Progress_Reports/DQN_v2/movies'
-filename = 'GalagaDemonsOfDeath-Nes-1Player.Level1-000003.bk2'
+directory = './Progress_Reports/DDQN_v3/movies'
+filename = 'GalagaDemonsOfDeath-Nes-1Player.Level1-000010.bk2'
 
 movie = retro.Movie(directory + '/' + filename)
 movie.step()
